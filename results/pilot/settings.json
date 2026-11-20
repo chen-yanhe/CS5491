@@ -1,0 +1,10 @@
+{
+  "search_data_seed": 5491,
+  "validation_data_seed": 5492,
+  "search_seed": 2026,
+  "search_instances": 10,
+  "validation_instances": 20,
+  "items": 1000,
+  "token_budget": 20000,
+  "max_calls": 60
+}

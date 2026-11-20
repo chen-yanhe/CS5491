@@ -1,0 +1,212 @@
+{
+  "settings": {
+    "search_data_seed": 5491,
+    "validation_data_seed": 5492,
+    "search_seed": 2026,
+    "search_instances": 10,
+    "validation_instances": 20,
+    "items": 1000,
+    "token_budget": 20000,
+    "max_calls": 60
+  },
+  "arms": [
+    {
+      "method": "First Fit",
+      "status": "evaluated",
+      "mean_validation_bins": 424.2,
+      "validation_counts": [
+        414,
+        420,
+        420,
+        424,
+        427,
+        422,
+        422,
+        420,
+        433,
+        419,
+        437,
+        425,
+        418,
+        421,
+        426,
+        424,
+        435,
+        429,
+        421,
+        427
+      ],
+      "relative_to_best_fit_pct": 0.438
+    },
+    {
+      "method": "Best Fit",
+      "status": "evaluated",
+      "mean_validation_bins": 422.35,
+      "validation_counts": [
+        413,
+        417,
+        419,
+        421,
+        424,
+        419,
+        422,
+        420,
+        430,
+        417,
+        433,
+        423,
+        416,
+        420,
+        425,
+        422,
+        434,
+        427,
+        419,
+        426
+      ],
+      "relative_to_best_fit_pct": 0.0
+    },
+    {
+      "method": "A",
+      "status": "evaluated",
+      "mean_validation_bins": 419.85,
+      "validation_counts": [
+        409,
+        416,
+        416,
+        420,
+        423,
+        418,
+        417,
+        418,
+        428,
+        414,
+        430,
+        421,
+        415,
+        418,
+        424,
+        419,
+        430,
+        423,
+        415,
+        423
+      ],
+      "winner": {
+        "id": 54,
+        "expression": "(gap if gap >= 0 else -1) + (1 - remaining) * (1 if gap >= 0 else 0.25) - abs(gap) * max(0, 0.5 - remaining) + (item - remaining) * (1 if remaining < item else 0) + 0.1 * (1 if abs(gap) < 0.05 else 0) - 0.1 * (1 if remaining < 0.05 else 0)",
+        "strategy": null,
+        "score": 418.3
+      },
+      "calls": 58,
+      "valid_candidates": 46,
+      "input_tokens": 14403,
+      "output_tokens": 4369,
+      "fingerprints": [
+        "bc19ba97cbe016479903222bb1578db6"
+      ],
+      "models": [
+        "deepseek-flash"
+      ],
+      "elapsed_seconds": 65.0,
+      "stop_reason": "budget_reserve",
+      "relative_to_best_fit_pct": -0.5919
+    },
+    {
+      "method": "B",
+      "status": "evaluated",
+      "mean_validation_bins": 422.35,
+      "validation_counts": [
+        413,
+        417,
+        419,
+        421,
+        424,
+        419,
+        422,
+        420,
+        430,
+        417,
+        433,
+        423,
+        416,
+        420,
+        425,
+        422,
+        434,
+        427,
+        419,
+        426
+      ],
+      "winner": {
+        "id": 0,
+        "expression": "-remaining",
+        "strategy": null,
+        "score": 420.8
+      },
+      "calls": 43,
+      "valid_candidates": 40,
+      "input_tokens": 12750,
+      "output_tokens": 5791,
+      "fingerprints": [
+        "bc19ba97cbe016479903222bb1578db6"
+      ],
+      "models": [
+        "deepseek-flash"
+      ],
+      "elapsed_seconds": 73.781,
+      "stop_reason": "budget_reserve",
+      "relative_to_best_fit_pct": 0.0
+    },
+    {
+      "method": "C",
+      "status": "evaluated",
+      "mean_validation_bins": 421.6,
+      "validation_counts": [
+        413,
+        417,
+        417,
+        423,
+        424,
+        419,
+        419,
+        418,
+        432,
+        416,
+        433,
+        422,
+        416,
+        417,
+        426,
+        422,
+        432,
+        425,
+        416,
+        425
+      ],
+      "winner": {
+        "id": 35,
+        "expression": "-(abs(gap) < 0.15) * gap - 0.1 * remaining",
+        "strategy": {
+          "rule": "Prefer tight fits (small |gap|), then larger remaining capacity but slightly discourage full bins.",
+          "change": "Adds a tight-fit threshold bonus instead of pure best-fit on remaining space.",
+          "tradeoff": "Reduces fragmentation from near-perfect matches but may open more bins when tight fits are scarce."
+        },
+        "score": 420.2
+      },
+      "calls": 40,
+      "valid_candidates": 40,
+      "input_tokens": 12794,
+      "output_tokens": 5273,
+      "fingerprints": [
+        "bc19ba97cbe016479903222bb1578db6"
+      ],
+      "models": [
+        "deepseek-flash"
+      ],
+      "elapsed_seconds": 66.718,
+      "stop_reason": "budget_reserve",
+      "relative_to_best_fit_pct": -0.1776
+    }
+  ]
+}

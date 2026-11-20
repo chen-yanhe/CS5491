@@ -1,0 +1,82 @@
+{
+  "settings": {
+    "search_data_seed": 5491,
+    "validation_data_seed": 5492,
+    "search_seed": 2026,
+    "search_instances": 10,
+    "validation_instances": 20,
+    "items": 1000,
+    "token_budget": 20000,
+    "max_calls": 60
+  },
+  "arms": [
+    {
+      "method": "First Fit",
+      "status": "evaluated",
+      "mean_validation_bins": 424.2,
+      "validation_counts": [
+        414,
+        420,
+        420,
+        424,
+        427,
+        422,
+        422,
+        420,
+        433,
+        419,
+        437,
+        425,
+        418,
+        421,
+        426,
+        424,
+        435,
+        429,
+        421,
+        427
+      ],
+      "relative_to_best_fit_pct": 0.438
+    },
+    {
+      "method": "Best Fit",
+      "status": "evaluated",
+      "mean_validation_bins": 422.35,
+      "validation_counts": [
+        413,
+        417,
+        419,
+        421,
+        424,
+        419,
+        422,
+        420,
+        430,
+        417,
+        433,
+        423,
+        416,
+        420,
+        425,
+        422,
+        434,
+        427,
+        419,
+        426
+      ],
+      "relative_to_best_fit_pct": 0.0
+    },
+    {
+      "method": "A",
+      "status": "pending"
+    },
+    {
+      "method": "B",
+      "status": "pending"
+    },
+    {
+      "method": "C",
+      "status": "pending"
+    }
+  ]
+}

@@ -14,6 +14,14 @@ python pilot.py baselines --output runs/baselines.json
 
 This takes a few seconds. On 20 pilot validation sequences of 1,000 items, the mean bin counts are **424.20 for First Fit** and **422.35 for Best Fit**. The tracked result is [`results/baselines.json`](results/baselines.json). The generator draws from Weibull with scale 45 and shape 3, rounds to integers in 1–100, and uses bin capacity 100, following the distribution in the [FunSearch supplement, Appendix E.4](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/Mathematical-discoveries-from-program-search-with-large-language-models.pdf). Seeds 5491 and 5492 generate 10 search and 20 validation sequences, respectively.
 
+## Reproduce the report table from the archived run
+
+```text
+python pilot.py replay --run results/pilot --output runs/replayed.json
+```
+
+Replay works without an API key and took about 14 seconds in the milestone environment. It recomputes the search scores and finalist selection for the archived DeepSeek responses. The output should match [`results/pilot/summary.json`](results/pilot/summary.json), with mean validation bin counts of **419.85 for A**, **422.35 for B**, and **421.60 for C**.
+
 ## Run A/B/C with DeepSeek
 
 Set the `DEEPSEEK_API_KEY` environment variable using an [API key from DeepSeek](https://platform.deepseek.com/api_keys).
@@ -27,6 +35,6 @@ The first command uses `deepseek-flash` with thinking disabled. Each arm has the
 
 The runner uses Best Fit as the initial program and a seeded random choice from the five best search candidates as the parent. The same constrained Python expression interface is used across arms. The evaluator handles feasibility and breaks score ties by bin opening order. Only mean search bin count determines the leaderboard. One repair request is allowed after an invalid response, with the same accounting as a new proposal. After search, the validation set selects a finalist from the five candidates on the leaderboard. The formal test set is reserved for the final experiments.
 
-Each arm writes a JSONL log with the candidate response, parent identifier, validation of the response format, search score or error, API model and fingerprint, elapsed time, and counted input and output tokens. Each run records its settings and a `summary.json` with validation counts and results relative to Best Fit. Replay needs no API key. It rebuilds the search scores and recalculates finalist scores from the archived model responses. Fresh API calls can return different candidates. For a submitted live result, archive the run's `settings.json` and A/B/C JSONL logs under `results/` and use that directory as `--run` to reproduce the report numbers.
+Each arm writes a JSONL log with the candidate response, parent identifier, validation of the response format, search score or error, API model and fingerprint, elapsed time, and counted input and output tokens. Each run records its settings and a `summary.json` with validation counts and results relative to Best Fit. Fresh API calls can return different candidates.
 
 `--arm A`, `--arm B`, or `--arm C` runs an individual condition within the same experiment settings. Completed arm logs are reused when starting the three-arm command again. If an API failure interrupts an arm, its log remains available for replay, and a fresh run should use a new output directory.
